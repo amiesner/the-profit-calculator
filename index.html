@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Profit Calc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
+  <link rel="icon" href="https://www.svgrepo.com/show/354390/cash-calculator.svg" type="image/svg+xml">
+  <meta name="description" content="The Profit Calc - Fast, simple eBay profit calculator to track margins, fees, and profits.">
+  <meta name="author" content="The Profit Calc">
+
+  <!-- Google AdSense (Placeholder) -->
+  <!-- Replace 'ca-pub-XXXXXXXXXXXXXXXX' with your actual publisher ID once approved -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7653787003568784"
+    crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="absolute top-4 right-4 flex gap-2 items-center">
+    <span class="text-sm font-semibold">The Profit Calc</span>
+    <button onclick="toggleDarkMode()" class="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-sm rounded shadow">
+      Toggle Dark Mode
+    </button>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-xl">
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <img src="https://www.svgrepo.com/show/354390/cash-calculator.svg" alt="Logo" class="w-10 h-10">
+      <h1 class="text-3xl font-bold text-center">The Profit Calc</h1>
+    </div>
+
+    <!-- AdSense Ad Slot -->
+    <div class="mb-6">
+      <ins class="adsbygoogle"
+        style="display:block;text-align:center;"
+        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+        data-ad-slot="1234567890"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="space-y-4">
+      <div>
+        <label class="block font-medium">Item Sale Price ($)</label>
+        <input type="number" id="salePrice" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+      </div>
+
+      <div>
+        <label class="block font-medium">Shipping Charged ($)</label>
+        <input type="number" id="shippingCharged" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+      </div>
+
+      <div>
+        <label class="block font-medium">eBay Fee (%)</label>
+        <input type="number" id="ebayFee" value="13.25" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+      </div>
+
+      <div>
+        <label class="block font-medium">PayPal Fee (%)</label>
+        <input type="number" id="paypalFee" value="2.9" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+      </div>
+
+      <div>
+        <label class="block font-medium">Shipping Cost ($)</label>
+        <input type="number" id="shippingCost" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+      </div>
+
+      <div>
+        <label class="block font-medium">Item Cost ($)</label>
+        <input type="number" id="itemCost" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+      </div>
+
+      <button onclick="calculateProfit()" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition">CALCULATE PROFIT</button>
+    </div>
+
+    <div class="mt-6 bg-blue-50 dark:bg-gray-700 p-4 rounded-lg shadow-inner" id="results"></div>
+  </div>
+
+  <script>
+    // Apply stored theme on load
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+
+    function calculateProfit() {
+      const salePrice = parseFloat(document.getElementById('salePrice').value) || 0;
+      const shippingCharged = parseFloat(document.getElementById('shippingCharged').value) || 0;
+      const ebayFee = parseFloat(document.getElementById('ebayFee').value) || 0;
+      const paypalFee = parseFloat(document.getElementById('paypalFee').value) || 0;
+      const shippingCost = parseFloat(document.getElementById('shippingCost').value) || 0;
+      const itemCost = parseFloat(document.getElementById('itemCost').value) || 0;
+
+      const grossIncome = salePrice + shippingCharged;
+      const ebayFees = (ebayFee / 100) * grossIncome;
+      const paypalFees = (paypalFee / 100) * grossIncome;
+      const totalFees = ebayFees + paypalFees;
+
+      const profit = grossIncome - totalFees - shippingCost - itemCost;
+      const margin = (profit / grossIncome) * 100;
+
+      document.getElementById('results').innerHTML = `
+        <p class="text-lg font-semibold text-green-700 dark:text-green-400">Total Profit: $${profit.toFixed(2)}</p>
+        <p class="text-md text-gray-800 dark:text-gray-200">Profit Margin: ${margin.toFixed(2)}%</p>
+        <p class="text-md text-gray-800 dark:text-gray-200">Total Fees: $${totalFees.toFixed(2)}</p>
+      `;
+    }
+
+    function toggleDarkMode() {
+      const root = document.documentElement;
+      const isDark = root.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+  </script>
+</body>
+</html>
