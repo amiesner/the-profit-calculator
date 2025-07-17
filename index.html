@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Profit Calc</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+  <title>The Profit Calc</title> 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,77 +19,106 @@
     };
   </script>
   <link rel="icon" href="https://www.svgrepo.com/show/354390/cash-calculator.svg" type="image/svg+xml">
-  <meta name="description" content="The Profit Calculator - Fast, simple eBay profit calculator to track margins, fees, and profits.">
-  <meta name="author" content="The Profit Calculator">
+  <meta name="description" content="The Profit Calc - Fast, simple eBay profit calculator to track margins, fees, and profits.">
+  <meta name="author" content="The Profit Calc">
 
   <!-- Google AdSense (Placeholder) -->
   <!-- Replace 'ca-pub-XXXXXXXXXXXXXXXX' with your actual publisher ID once approved -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7653787003568784"
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
     crossorigin="anonymous"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
   <div class="absolute top-4 right-4 flex gap-2 items-center">
-    <span class="text-sm font-semibold">The Profit Calculator</span>
+    <span class="text-sm font-semibold">The Profit Calc</span>
     <button onclick="toggleDarkMode()" class="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-sm rounded shadow">
       Toggle Dark Mode
     </button>
   </div>
 
-  <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-xl">
-    <div class="flex items-center justify-center gap-3 mb-6">
-      <img src="logo.png" alt="Logo" class="w-10 h-10">
-      <h1 class="text-3xl font-bold text-center">The Profit Calculator</h1>
-      <p>Your go-to tool for quickly and accurately calculating profits, margins, and more. Whether you're flipping products online, running an e-commerce store, or just budgeting a side hustle, The Profit Calculator makes it simple to break down costs and earnings.</p>
-      <p>No spreadsheets. No confusion. Just fast, clean insights.</p>
+  <div class="flex-grow flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-xl">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <img src="https://www.svgrepo.com/show/354390/cash-calculator.svg" alt="Logo" class="w-10 h-10">
+        <h1 class="text-3xl font-bold text-center">The Profit Calc</h1>
+      </div>
+
+      <!-- AdSense Ad Slot -->
+      <div class="mb-6">
+        <ins class="adsbygoogle"
+          style="display:block;text-align:center;"
+          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+          data-ad-slot="1234567890"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block font-medium">Item Sale Price ($)</label>
+          <input type="number" id="salePrice" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+        </div>
+
+        <div>
+          <label class="block font-medium">Shipping Charged ($)</label>
+          <input type="number" id="shippingCharged" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+        </div>
+
+        <div>
+          <label class="block font-medium">eBay Fee (%)</label>
+          <input type="number" id="ebayFee" value="13.25" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+        </div>
+
+        <div>
+          <label class="block font-medium">PayPal Fee (%)</label>
+          <input type="number" id="paypalFee" value="2.9" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+        </div>
+
+        <div>
+          <label class="block font-medium">Shipping Cost ($)</label>
+          <input type="number" id="shippingCost" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+        </div>
+
+        <div>
+          <label class="block font-medium">Item Cost ($)</label>
+          <input type="number" id="itemCost" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
+        </div>
+
+        <button onclick="calculateProfit()" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition">CALCULATE PROFIT</button>
+      </div>
+
+      <div class="mt-6 bg-blue-50 dark:bg-gray-700 p-4 rounded-lg shadow-inner" id="results"></div>
     </div>
-
-    <!-- AdSense Ad Slot -->
-    <div class="mb-6">
-      <ins class="adsbygoogle"
-        style="display:block;text-align:center;"
-        data-ad-client="ca-pub-7653787003568784"
-        data-ad-slot="4602479974"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <div class="space-y-4">
-      <div>
-        <label class="block font-medium">Item Sale Price ($)</label>
-        <input type="number" id="salePrice" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-
-      <div>
-        <label class="block font-medium">Shipping Charged ($)</label>
-        <input type="number" id="shippingCharged" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-
-      <div>
-        <label class="block font-medium">eBay Fee (%)</label>
-        <input type="number" id="ebayFee" value="13.25" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-
-      <div>
-        <label class="block font-medium">PayPal Fee (%)</label>
-        <input type="number" id="paypalFee" value="2.9" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-
-      <div>
-        <label class="block font-medium">Shipping Cost ($)</label>
-        <input type="number" id="shippingCost" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-
-      <div>
-        <label class="block font-medium">Item Cost ($)</label>
-        <input type="number" id="itemCost" class="w-full mt-1 p-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-
-      <button onclick="calculateProfit()" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition">CALCULATE PROFIT</button>
-    </div>
-
-    <div class="mt-6 bg-blue-50 dark:bg-gray-700 p-4 rounded-lg shadow-inner" id="results"></div>
   </div>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 mt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img src="https://www.svgrepo.com/show/354390/cash-calculator.svg" alt="Logo" class="w-6 h-6">
+          <span class="text-sm font-semibold text-gray-600 dark:text-gray-400">
+            © 2024 The Profit Calc. All rights reserved.
+          </span>
+        </div>
+        
+        <div class="flex gap-6 text-sm">
+          <a href="contact.html" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+            Contact Us
+          </a>
+          <a href="privacy-policy.html" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+            Privacy Policy
+          </a>
+        </div>
+      </div>
+      
+      <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 text-center">
+        <p class="text-xs text-gray-500 dark:text-gray-400">
+          Fast, simple eBay profit calculator to track margins, fees, and profits.
+        </p>
+      </div>
+    </div>
+  </footer>
 
   <script>
     // Apply stored theme on load
