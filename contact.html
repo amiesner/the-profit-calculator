@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - The Profit Calc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
+  <link rel="icon" href="https://www.svgrepo.com/show/354390/cash-calculator.svg" type="image/svg+xml">
+  <meta name="description" content="Contact The Profit Calc - Get in touch with questions, suggestions, or bug reports.">
+  <meta name="author" content="The Profit Calc">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="absolute top-4 right-4 flex gap-2 items-center">
+    <a href="ebay_profit_calc.html" class="px-4 py-2 bg-blue-600 text-white text-sm rounded shadow hover:bg-blue-700 transition">
+      Back to Calculator
+    </a>
+    <button onclick="toggleDarkMode()" class="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-sm rounded shadow">
+      Toggle Dark Mode
+    </button>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-2xl">
+    <div class="flex items-center justify-center gap-3 mb-8">
+      <img src="https://www.svgrepo.com/show/354390/cash-calculator.svg" alt="Logo" class="w-10 h-10">
+      <h1 class="text-4xl font-bold text-center">Contact Us</h1>
+    </div>
+
+    <div class="text-center space-y-6">
+      <div class="bg-blue-50 dark:bg-gray-700 p-6 rounded-lg">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Get in Touch</h2>
+        <p class="text-lg mb-6 leading-relaxed">
+          Have questions, suggestions, or found a bug?<br>
+          We'd love to hear from you!
+        </p>
+        
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-inner border-2 border-blue-200 dark:border-blue-600">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Email us directly at:</p>
+          <a href="mailto:admin@the-profit-calculator.com" 
+             class="text-2xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+            admin@the-profit-calculator.com
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+        <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+          <div class="text-green-600 dark:text-green-400 text-2xl mb-2">💡</div>
+          <h3 class="font-semibold text-green-800 dark:text-green-300">Suggestions</h3>
+          <p class="text-sm text-green-700 dark:text-green-400">Ideas for new features or improvements</p>
+        </div>
+        
+        <div class="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg">
+          <div class="text-yellow-600 dark:text-yellow-400 text-2xl mb-2">❓</div>
+          <h3 class="font-semibold text-yellow-800 dark:text-yellow-300">Questions</h3>
+          <p class="text-sm text-yellow-700 dark:text-yellow-400">Need help using the calculator?</p>
+        </div>
+        
+        <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
+          <div class="text-red-600 dark:text-red-400 text-2xl mb-2">🐛</div>
+          <h3 class="font-semibold text-red-800 dark:text-red-300">Bug Reports</h3>
+          <p class="text-sm text-red-700 dark:text-red-400">Found something that's not working?</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mt-8">
+        <h3 class="text-lg font-semibold mb-3">Response Time</h3>
+        <p class="text-gray-600 dark:text-gray-400">
+          We typically respond to emails within 24-48 hours during business days.
+        </p>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-600">
+        <a href="ebay_profit_calc.html" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+          Return to Calculator
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Apply stored theme on load
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+
+    function toggleDarkMode() {
+      const root = document.documentElement;
+      const isDark = root.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+  </script>
+</body>
+</html>
